@@ -62,7 +62,3 @@ def index():
             response = put_request(endpoint, headers, payload)
             return render_template('index.html', ENDPOINT = endpoint, HEADERS = headers_str, PAYLOAD = payload_str,
                                    RESPONSE = response)
-
-
-if __name__ == '__main__':
-    app.run()
