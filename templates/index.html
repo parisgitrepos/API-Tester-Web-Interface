@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quick API Tester</title>
+</head>
+<body>
+<form method = "post">
+    <label class="form-label"><strong>Endpoint</strong></label><br>
+    <input type="url" class="form-control" name = "endpoint" value = "{{ ENDPOINT }}">
+
+    <br>
+    <br>
+
+    <label class="form-label"><strong>Request Method</strong></label><br>
+    <select class="form-select" name = "method"><optgroup label="Request Type">
+        <option value="GET" selected="">GET</option>
+        <option value="POST">POST</option>
+        <option value="PUT">PUT</option></optgroup>
+    </select>
+
+    <br>
+    <br>
+
+    <label class="form-label"><strong>Headers (in the form {"key": "value"})</strong></label><br>
+    <textarea class="form-control" name = "headers">{{ HEADERS }}</textarea>
+
+    <br>
+    <br>
+
+    <label class="form-label">
+        <strong>Payload (in the form {"key": "value"})</strong></label><br>
+    <textarea class="form-control" name = "payload">{{ PAYLOAD }}</textarea>
+
+    <br>
+    <br>
+
+    <input type="submit" value = "Submit">
+</form>
+
+<br>
+<br>
+
+<h3>Response</h3>
+<textarea class="form-control">{{ RESPONSE }}</textarea>
+
+
+</body>
+</html>
+
