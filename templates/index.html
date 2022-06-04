@@ -13,10 +13,10 @@
     <br>
 
     <label class="form-label"><strong>Request Method</strong></label><br>
-    <select class="form-select" name = "method"><optgroup label="Request Type">
-        <option value="GET" selected="">GET</option>
-        <option value="POST">POST</option>
-        <option value="PUT">PUT</option></optgroup>
+    <select class="form-select" name = "method"><optgroup label = "Request Method">
+        <option value="GET" {% if METHOD == "GET" %} selected {% endif %}>GET</option>
+        <option value="POST" {% if METHOD == "POST" %} selected {% endif %}>POST</option>
+        <option value="PUT" {% if METHOD == "PUT" %} selected {% endif %}>PUT</option></optgroup>
     </select>
 
     <br>

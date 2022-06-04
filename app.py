@@ -8,7 +8,7 @@ app = Flask(__name__)
 @app.route('/', methods = ['GET', 'POST'])
 def index():
     if request.method == 'GET':
-        return render_template('index.html', ENDPOINT = '', HEADERS = '', PAYLOAD = '',
+        return render_template('index.html', ENDPOINT = '', METHOD = 'GET', HEADERS = '', PAYLOAD = '',
                                RESPONSE = 'No response received yet')
     elif request.method == 'POST':
         endpoint = request.form.get('endpoint')
@@ -27,7 +27,7 @@ def index():
                 headers_str = str(headers).replace("'", '"')
 
             except json.decoder.JSONDecodeError:
-                return render_template('index.html', ENDPOINT = endpoint, HEADERS = headers,
+                return render_template('index.html', ENDPOINT = endpoint, METHOD = method, HEADERS = headers,
                                        PAYLOAD = payload, RESPONSE = 'Headers incorrectly formatted')
         else:
             headers = None
@@ -44,7 +44,7 @@ def index():
                 payload_str = str(payload).replace("'", '"')
 
             except json.decoder.JSONDecodeError:
-                return render_template('index.html', ENDPOINT = endpoint, HEADERS = headers,
+                return render_template('index.html', ENDPOINT = endpoint, METHOD = method, HEADERS = headers,
                                        PAYLOAD = payload, RESPONSE = 'Payload incorrectly formatted')
         else:
             payload = None
@@ -52,13 +52,13 @@ def index():
 
         if method == 'GET':
             response = get_request(endpoint, headers, payload)
-            return render_template('index.html', ENDPOINT = endpoint, HEADERS = headers_str, PAYLOAD = payload_str,
+            return render_template('index.html', ENDPOINT = endpoint, METHOD = method, HEADERS = headers_str, PAYLOAD = payload_str,
                                    RESPONSE = response)
         elif method == 'POST':
             response = post_request(endpoint, headers, payload)
-            return render_template('index.html', ENDPOINT = endpoint, HEADERS = headers_str, PAYLOAD = payload_str,
+            return render_template('index.html', ENDPOINT = endpoint, METHOD = method, HEADERS = headers_str, PAYLOAD = payload_str,
                                    RESPONSE = response)
         elif method == 'PUT':
             response = put_request(endpoint, headers, payload)
-            return render_template('index.html', ENDPOINT = endpoint, HEADERS = headers_str, PAYLOAD = payload_str,
+            return render_template('index.html', ENDPOINT = endpoint, METHOD = method, HEADERS = headers_str, PAYLOAD = payload_str,
                                    RESPONSE = response)
