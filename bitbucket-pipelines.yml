@@ -26,9 +26,10 @@ pipelines:
             - docker
           script:
             - export DOCKER_BUILDKIT=1
-            - docker build -t docker_img .
-            - docker tag docker_img thehobbydeveloper2839/quick-api-tester:docker_img
-            - docker push thehobbydeveloper2839/quick-api-tester:docker_img
+            - docker build -t latest .
+            - docker login -u thehobbydeveloper2839 -p 9a0dddcc-3c1c-4b75-893b-ae786f6dd1b9
+            - docker tag docker_img thehobbydeveloper2839/quick-api-tester:latest
+            - docker push thehobbydeveloper2839/quick-api-tester:latest
 
     # The following deployment steps will be executed for each pipeline run. To configure your steps and conditionally deploy see https://support.atlassian.com/bitbucket-cloud/docs/configure-bitbucket-pipelinesyml/
     - step:
