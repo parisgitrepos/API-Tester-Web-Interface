@@ -21,12 +21,13 @@ pipelines:
           script:
             - echo "Your security scan goes here..."
       - step:
-          name: "Build Docker container"
+          name: "Build Docker container to Docker Hub"
           services:
             - docker
           script:
             - export DOCKER_BUILDKIT=1
             - docker build .
+            - docker push thehobbydeveloper2839/quick-api-tester:docker_img
 
     # The following deployment steps will be executed for each pipeline run. To configure your steps and conditionally deploy see https://support.atlassian.com/bitbucket-cloud/docs/configure-bitbucket-pipelinesyml/
     - step:
