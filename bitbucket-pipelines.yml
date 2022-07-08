@@ -27,19 +27,6 @@ pipelines:
           script:
             - export DOCKER_BUILDKIT=1
             - docker build -t latest .
-            - docker login -u thehobbydeveloper2839 -p 9a0dddcc-3c1c-4b75-893b-ae786f6dd1b9
+            - docker login -u thehobbydeveloper2839 -p $DOCKER_KEY
             - docker tag latest thehobbydeveloper2839/quick-api-tester:latest
             - docker push thehobbydeveloper2839/quick-api-tester:latest
-
-    # The following deployment steps will be executed for each pipeline run. To configure your steps and conditionally deploy see https://support.atlassian.com/bitbucket-cloud/docs/configure-bitbucket-pipelinesyml/
-    - step:
-        name: 'Deployment to Staging'
-        deployment: staging
-        script:
-          - echo "Your deployment to staging script goes here..."
-    - step:
-        name: 'Deployment to Production'
-        deployment: production
-        trigger: 'manual'
-        script:
-          - echo "Your deployment to production script goes here..."
