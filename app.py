@@ -5,11 +5,11 @@ from backend import get_request, post_request, put_request
 app = Flask(__name__)
 
 
-@app.route('/', methods = ['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'GET':
-        return render_template('index.html', ENDPOINT = '', METHOD = 'GET', HEADERS = '', PAYLOAD = '',
-                               RESPONSE = 'No response received yet')
+        return render_template('index.html', ENDPOINT='', METHOD='GET', HEADERS='', PAYLOAD='',
+                               RESPONSE='No response received yet')
     elif request.method == 'POST':
         endpoint = request.form.get('endpoint')
         method = request.form.get('method')
@@ -27,8 +27,8 @@ def index():
                 headers_str = str(headers).replace("'", '"')
 
             except json.decoder.JSONDecodeError:
-                return render_template('index.html', ENDPOINT = endpoint, METHOD = method, HEADERS = headers,
-                                       PAYLOAD = payload, RESPONSE = 'Headers incorrectly formatted')
+                return render_template('index.html', ENDPOINT=endpoint, METHOD=method, HEADERS=headers,
+                                       PAYLOAD=payload, RESPONSE='Headers incorrectly formatted')
         else:
             headers = None
             headers_str = ''
@@ -44,21 +44,24 @@ def index():
                 payload_str = str(payload).replace("'", '"')
 
             except json.decoder.JSONDecodeError:
-                return render_template('index.html', ENDPOINT = endpoint, METHOD = method, HEADERS = headers,
-                                       PAYLOAD = payload, RESPONSE = 'Payload incorrectly formatted')
+                return render_template('index.html', ENDPOINT=endpoint, METHOD=method, HEADERS=headers,
+                                       PAYLOAD=payload, RESPONSE='Payload incorrectly formatted')
         else:
             payload = None
             payload_str = ''
 
         if method == 'GET':
             response = get_request(endpoint, headers, payload)
-            return render_template('index.html', ENDPOINT = endpoint, METHOD = method, HEADERS = headers_str, PAYLOAD = payload_str,
-                                   RESPONSE = response)
+            return render_template('index.html', ENDPOINT=endpoint, METHOD=method, HEADERS=headers_str,
+                                   PAYLOAD=payload_str,
+                                   RESPONSE=response)
         elif method == 'POST':
             response = post_request(endpoint, headers, payload)
-            return render_template('index.html', ENDPOINT = endpoint, METHOD = method, HEADERS = headers_str, PAYLOAD = payload_str,
-                                   RESPONSE = response)
+            return render_template('index.html', ENDPOINT=endpoint, METHOD=method, HEADERS=headers_str,
+                                   PAYLOAD=payload_str,
+                                   RESPONSE=response)
         elif method == 'PUT':
             response = put_request(endpoint, headers, payload)
-            return render_template('index.html', ENDPOINT = endpoint, METHOD = method, HEADERS = headers_str, PAYLOAD = payload_str,
-                                   RESPONSE = response)
+            return render_template('index.html', ENDPOINT=endpoint, METHOD=method, HEADERS=headers_str,
+                                   PAYLOAD=payload_str,
+                                   RESPONSE=response)
